@@ -1,4 +1,4 @@
-# weidu
+# Dimensions
 # <div align="center">🌌 维度探索 - Dimension Explorer</div>
 <div align="center">
 
