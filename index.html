@@ -1,559 +1,1092 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>维度探索 - 穿越十一维度的神秘旅程</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-theme: {
-extend: {
-colors: {
-void: '#030308',
-cosmic: '#0a0a1f',
-nebula: '#1a1a3e',
-stellar: '#00d4ff',
-aurora: '#7b2dff',
-nova: '#ff6b35',
-quasar: '#ffd700',
-matrix: '#00ff41'
-},
-fontFamily: {
-display: ['Orbitron', 'sans-serif'],
-body: ['Noto Sans SC', 'sans-serif']
-}
-}
-}
-}
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/scifiCompendium.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌌 维度探索器 - 穿越十一维度的神秘旅程</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-void: #030308;
+      --color-cosmic: #0a0a1f;
+      --color-nebula: #1a1a3e;
+      --color-stellar: #00d4ff;
+      --color-aurora: #7b2dff;
+      --color-nova: #ff6b35;
+      --color-quasar: #ffd700;
+      --glow-sm: 0 0 10px rgba(0, 212, 255, 0.3);
+      --glow-md: 0 0 20px rgba(0, 212, 255, 0.5);
+      --glow-lg: 0 0 30px rgba(0, 212, 255, 0.7);
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(180deg, var(--color-void), var(--color-cosmic), var(--color-nebula));
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* 滚动条样式 */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-void);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--color-stellar), var(--color-aurora));
+      border-radius: 5px;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      background: rgba(3, 3, 8, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--glow-sm);
+    }
+
+    .navbar-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: var(--glow-md);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #a0a0a0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-stellar);
+      transform: translateY(-2px);
+    }
+
+    /* 英雄区域 */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 2rem 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora), var(--color-nova));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: #a0a0a0;
+      margin-bottom: 1rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: #808080;
+      margin-bottom: 3rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora));
+      color: white;
+      box-shadow: var(--glow-md);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow-lg);
+    }
+
+    .btn-secondary {
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--color-stellar);
+      border: 2px solid var(--color-stellar);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 212, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: #606060;
+      font-size: 0.8rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* 主要内容区域 */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 50px 2rem;
+    }
+
+    .section {
+      margin-bottom: 100px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .section-subtitle {
+      color: #808080;
+      font-size: 1.1rem;
+    }
+
+    /* 维度卡片网格 */
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .dimension-card {
+      background: rgba(10, 10, 31, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dimension-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-stellar), var(--color-aurora), var(--color-nova));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .dimension-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: var(--glow-md);
+    }
+
+    .dimension-card:hover::before {
+      opacity: 1;
+    }
+
+    .dimension-emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .dimension-number {
+      font-size: 0.9rem;
+      color: var(--color-stellar);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .dimension-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .dimension-chinese {
+      font-size: 1.2rem;
+      color: var(--color-aurora);
+      margin-bottom: 1rem;
+    }
+
+    .dimension-description {
+      color: #a0a0a0;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    /* 理论卡片 */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .theory-card {
+      background: rgba(10, 10, 31, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .theory-card:hover {
+      background: rgba(10, 10, 31, 0.8);
+      border-color: rgba(0, 212, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .theory-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .theory-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .theory-description {
+      color: #808080;
+      font-size: 0.95rem;
+    }
+
+    /* 科学家卡片 */
+    .scientist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .scientist-card {
+      background: rgba(10, 10, 31, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .scientist-card:hover {
+      transform: scale(1.05);
+      border-color: rgba(0, 212, 255, 0.2);
+    }
+
+    .scientist-emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .scientist-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .scientist-contribution {
+      color: var(--color-stellar);
+      font-size: 0.9rem;
+    }
+
+    /* 页脚 */
+    .footer {
+      background: rgba(3, 3, 8, 0.8);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social a {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+      display: inline-block;
+    }
+
+    .footer-social a:hover {
+      transform: scale(1.2);
+    }
+
+    .footer-text {
+      color: #606060;
+      font-size: 0.9rem;
+    }
+
+    .footer-subtext {
+      color: #404040;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .dimension-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .theory-grid,
+      .scientist-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 动画 */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    /* 模态框 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, rgba(10, 10, 31, 0.95), rgba(3, 3, 8, 0.95));
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-close {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: #808080;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: white;
+    }
+
+    .modal-body {
+      color: #a0a0a0;
+      line-height: 1.8;
+    }
+
+    /* 加载动画 */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-void);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-emoji {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .loader-text {
+      color: var(--color-stellar);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .loader-subtext {
+      color: #606060;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
-<body class="bg-void text-gray-100">
-<!-- 页面进度条 -->
-<div class="page-progress" id="pageProgress" style="width: 0%"></div>
+<body>
+  <!-- 加载动画 -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-emoji">🌌</div>
+      <div class="loader-text">正在启动维度引擎...</div>
+      <div class="loader-subtext">加载宇宙数据中</div>
+    </div>
+  </div>
 
-<!-- 流星雨背景 -->
-<canvas id="meteor-canvas"></canvas>
-<div class="nebula-overlay"></div>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="logo">
+        <div class="logo-icon">∞</div>
+        <span>DIMENSION EXPLORER</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero">🏠 首页</a></li>
+        <li><a href="#dimensions">📐 维度</a></li>
+        <li><a href="#theory">🎻 理论</a></li>
+        <li><a href="#scientists">🔬 科学家</a></li>
+        <li><a href="#scifi">👽 科幻</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<!-- 维度快速导航 -->
-<nav class="dim-nav-widget" id="dimNav" aria-label="维度快速导航"></nav>
+  <!-- 英雄区域 -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🚀</span>
+        <span>欢迎来到宇宙的终极边界</span>
+        <span>⭐</span>
+      </div>
+      <h1 class="hero-title">
+        穿越<span class="highlight">十一维度</span>的神秘旅程
+      </h1>
+      <p class="hero-subtitle">
+        从<span style="color: var(--color-stellar);">一个点</span>到
+        <span style="color: var(--color-aurora);">无限可能</span>
+      </p>
+      <p class="hero-description">
+        🌌 探索隐藏在现实背后的宇宙真相 - 一个关于空间、时间、平行宇宙与弦理论的交互式科普旅程
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollToSection('dimensions')">
+          <span>▶️</span> 开始探索之旅
+        </button>
+        <button class="btn btn-secondary" onclick="showQuickNav()">
+          <span>🧭</span> 快速导航
+        </button>
+      </div>
+      <div class="scroll-indicator">
+        <span>向下滚动</span>
+        <span>⬇️</span>
+      </div>
+    </div>
+  </section>
 
-<!-- 主导航 -->
-<header class="fixed top-0 left-0 right-0 z-50 glass-panel border-0 border-b border-stellar/10">
-<div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-stellar to-aurora flex items-center justify-center shadow-lg shadow-stellar/20">
-<i class="fas fa-infinity text-white"></i>
-</div>
-<span class="font-display text-lg font-bold bg-gradient-to-r from-stellar to-aurora bg-clip-text text-transparent">DIMENSION EXPLORER</span>
-</div>
-<div class="hidden md:flex items-center gap-6">
-<a href="#hero" class="text-gray-400 hover:text-stellar transition-colors text-sm font-medium">首页</a>
-<a href="#intro" class="text-gray-400 hover:text-stellar transition-colors text-sm font-medium">起源</a>
-<a href="#dimensions" class="text-gray-400 hover:text-stellar transition-colors text-sm font-medium">维度探索</a>
-<a href="#theory" class="text-gray-400 hover:text-stellar transition-colors text-sm font-medium">理论</a>
-<button id="infoBtn" class="text-gray-400 hover:text-stellar transition-colors" aria-label="关于">
-<i class="fas fa-question-circle"></i>
-</button>
-</div>
-<button id="mobileMenuBtn" class="md:hidden text-stellar text-xl p-2" aria-label="菜单">
-<i class="fas fa-bars"></i>
-</button>
-</div>
-</header>
+  <!-- 主内容 -->
+  <main class="main-content">
+    <!-- 维度区域 -->
+    <section class="section" id="dimensions">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>📐</span> 维度探索
+        </h2>
+        <p class="section-subtitle">从 0 维奇点到 11 维 M 理论，踏上这场跨越维度的神秘旅程</p>
+      </div>
+      <div class="dimension-grid" id="dimension-grid"></div>
+    </section>
 
-<!-- 移动端菜单 -->
-<div id="mobileMenu" class="fixed inset-0 z-40 bg-void/98 backdrop-blur-xl hidden">
-<div class="flex flex-col items-center justify-center h-full gap-8">
-<a href="#hero" class="text-2xl text-gray-300 hover:text-stellar transition-colors mobile-link">首页</a>
-<a href="#intro" class="text-2xl text-gray-300 hover:text-stellar transition-colors mobile-link">起源</a>
-<a href="#dimensions" class="text-2xl text-gray-300 hover:text-stellar transition-colors mobile-link">维度探索</a>
-<a href="#theory" class="text-2xl text-gray-300 hover:text-stellar transition-colors mobile-link">理论</a>
-<button id="closeMobileMenu" class="mt-8 text-gray-500 hover:text-white">
-<i class="fas fa-times text-2xl"></i>
-</button>
-</div>
-</div>
+    <!-- 理论区域 -->
+    <section class="section" id="theory">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>🎻</span> 理论基石
+        </h2>
+        <p class="section-subtitle">支撑高维物理学的科学框架</p>
+      </div>
+      <div class="theory-grid" id="theory-grid"></div>
+    </section>
 
-<!-- 主内容 -->
-<main class="relative z-10">
-<!-- Hero 区域 -->
-<section id="hero" class="min-h-screen flex items-center justify-center px-4 pt-16">
-<div class="max-w-5xl mx-auto text-center">
-<div class="reveal-item">
-<div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel text-sm text-stellar mb-8">
-<i class="fas fa-rocket emoji-float"></i>
-<span>欢迎来到宇宙的终极边界</span>
-<i class="fas fa-star emoji-float" style="animation-delay: 0.5s;"></i>
-</div>
-</div>
+    <!-- 科学家区域 -->
+    <section class="section" id="scientists">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>🔬</span> 物理学先驱
+        </h2>
+        <p class="section-subtitle">探索维度理论的伟大科学家们</p>
+      </div>
+      <div class="scientist-grid" id="scientist-grid"></div>
+    </section>
 
-<h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight reveal-item">
-<span class="text-white">穿越</span>
-<span class="bg-gradient-to-r from-stellar via-aurora to-nova bg-clip-text text-transparent">十一维度</span>
-</h1>
+    <!-- 科幻百科区域 -->
+    <section class="section" id="scifi">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>👽</span> 科幻百科
+        </h2>
+        <p class="section-subtitle">科幻作品中的维度概念与想象</p>
+      </div>
+      <div class="theory-grid" id="scifi-grid"></div>
+    </section>
+  </main>
 
-<p class="text-xl md:text-2xl text-gray-400 mb-6 reveal-item max-w-3xl mx-auto leading-relaxed">
-从<span class="text-stellar font-semibold">一个点</span>到<span class="text-aurora font-semibold">无限可能</span>
-<br class="hidden md:block">
-探索隐藏在现实背后的宇宙真相
-</p>
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-social">
+      <a href="#" title="GitHub">🐙</a>
+      <a href="#" title="Twitter">🐦</a>
+      <a href="#" title="Email">✉️</a>
+    </div>
+    <p class="footer-text">维度探索器 - 探索宇宙的终极奥秘</p>
+    <p class="footer-subtext">基于现代物理学理论的科普项目</p>
+  </footer>
 
-<p class="text-gray-500 mb-12 reveal-item text-sm md:text-base">
-🌌 一个关于空间、时间、平行宇宙与弦理论的交互式科普旅程
-</p>
+  <!-- 模态框 -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">标题</h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
 
-<div class="flex flex-col sm:flex-row gap-4 justify-center reveal-item">
-<a href="#intro" class="btn-cosmic bg-gradient-to-r from-stellar to-aurora text-white font-semibold">
-<i class="fas fa-play mr-2"></i>
-开始探索之旅
-</a>
-<button id="quickNavBtn" class="btn-cosmic glass-panel text-stellar font-semibold hover:text-white">
-<i class="fas fa-compass mr-2"></i>
-快速导航
-</button>
-</div>
+  <!-- JavaScript -->
+  <script type="module">
+    // 维度数据
+    const dimensions = [
+      {
+        number: 0,
+        name: 'Singularity',
+        chineseName: '奇点',
+        emoji: '⚫',
+        description: '零维空间，一个没有长度、宽度、高度的点。所有维度都从这里开始，它是宇宙的起点，也是大爆炸之前的状态。'
+      },
+      {
+        number: 1,
+        name: 'Line',
+        chineseName: '线',
+        emoji: '📏',
+        description: '一维空间，只有长度的直线。连接两个点形成一条线，这是一维生物所能感知的全部世界。'
+      },
+      {
+        number: 2,
+        name: 'Plane',
+        chineseName: '面',
+        emoji: '📐',
+        description: '二维空间，由无数条线组成的平面。就像一张纸上的画，二维生物只能看到线条的截面。'
+      },
+      {
+        number: 3,
+        name: 'Space',
+        chineseName: '体',
+        emoji: '🧊',
+        description: '三维空间，我们生活的世界。由无数个平面堆叠而成，拥有长度、宽度和高度。'
+      },
+      {
+        number: 4,
+        name: 'Spacetime',
+        chineseName: '时空',
+        emoji: '⏳',
+        description: '四维时空，在三维空间的基础上加上时间维度。爱因斯坦的相对论揭示了时间和空间的统一性。'
+      },
+      {
+        number: 5,
+        name: 'Probability',
+        chineseName: '可能性',
+        emoji: '🌀',
+        description: '五维空间，包含所有可能的选择分支。每一个决定都会创造新的时间线，形成无限的可能性。'
+      },
+      {
+        number: 6,
+        name: 'Cosmic Web',
+        chineseName: '宇宙网',
+        emoji: '🌌',
+        description: '六维空间，可以折叠和跳跃不同的时间线。就像把纸折叠起来让两点靠近一样。'
+      },
+      {
+        number: 7,
+        name: 'Multiverse',
+        chineseName: '多宇宙',
+        emoji: '🔮',
+        description: '七维空间，包含所有可能宇宙的集合。每个宇宙都有不同的物理定律和初始条件。'
+      },
+      {
+        number: 8,
+        name: 'Infinity',
+        chineseName: '无限',
+        emoji: '♾️',
+        description: '八维空间，所有可能的历史和未来的完整集合。包含了无限个七维多重宇宙。'
+      },
+      {
+        number: 9,
+        name: 'Miracle',
+        chineseName: '奇迹',
+        emoji: '✨',
+        description: '九维空间，可以瞬间改变物理定律本身。在这里，不可能成为可能。'
+      },
+      {
+        number: 10,
+        name: 'Ultimate',
+        chineseName: '终极',
+        emoji: '🌟',
+        description: '十维空间，所有可能性的顶点。弦理论认为我们的宇宙实际上是十维的。'
+      },
+      {
+        number: 11,
+        name: 'Omniscient',
+        chineseName: '全知',
+        emoji: '👁️',
+        description: '十一维空间，M 理论的巅峰。所有维度、所有可能性、所有宇宙的终极统一。'
+      }
+    ];
 
-<div class="flex flex-col sm:flex-row gap-4 justify-center mt-6 reveal-item">
-<button id="simulatorBtn" class="btn-cosmic glass-panel text-aurora font-semibold hover:text-white">
-<i class="fas fa-sliders-h mr-2"></i>
-维度模拟器
-</button>
-<button id="gameBtn" class="btn-cosmic glass-panel text-nova font-semibold hover:text-white">
-<i class="fas fa-gamepad mr-2"></i>
-互动游戏
-</button>
-</div>
+    // 理论数据
+    const theories = [
+      {
+        id: 'string',
+        name: '弦理论',
+        emoji: '🎻',
+        description: '宇宙的基本组成单元不是点状粒子，而是一维的"弦"。弦的不同振动模式产生了不同的基本粒子。'
+      },
+      {
+        id: 'mTheory',
+        name: 'M 理论',
+        emoji: '🔷',
+        description: '统一五种超弦理论的终极框架，需要 11 个维度。M 可能代表"膜"（Membrane）或"神秘"（Mystery）。'
+      },
+      {
+        id: 'holographic',
+        name: '全息原理',
+        emoji: '💿',
+        description: '三维宇宙的所有信息可能被编码在二维边界上，就像全息图一样。'
+      },
+      {
+        id: 'multiverse',
+        name: '多重宇宙',
+        emoji: '🌐',
+        description: '量子力学的多世界诠释暗示了平行宇宙的存在，每个选择都创造新的宇宙分支。'
+      }
+    ];
 
-<div class="flex flex-col sm:flex-row gap-4 justify-center mt-4 reveal-item">
-<button id="puzzleBtn" class="btn-cosmic glass-panel text-purple-400 font-semibold hover:text-white">
-<i class="fas fa-puzzle-piece mr-2"></i>
-维度拼图
-</button>
-<button id="builderBtn" class="btn-cosmic glass-panel text-green-400 font-semibold hover:text-white">
-<i class="fas fa-cubes mr-2"></i>
-维度建造者
-</button>
-</div>
+    // 科学家数据
+    const scientists = [
+      {
+        name: '阿尔伯特·爱因斯坦',
+        emoji: '🧙‍♂️',
+        contribution: '相对论'
+      },
+      {
+        name: '斯蒂芬·霍金',
+        emoji: '🌌',
+        contribution: '黑洞辐射'
+      },
+      {
+        name: '爱德华·威滕',
+        emoji: '🔬',
+        contribution: 'M 理论'
+      },
+      {
+        name: '丘成桐',
+        emoji: '🏔️',
+        contribution: '卡拉比 - 丘流形'
+      },
+      {
+        name: '尼尔斯·玻尔',
+        emoji: '⚛️',
+        contribution: '量子力学'
+      },
+      {
+        name: '理查德·费曼',
+        emoji: '🎯',
+        contribution: '路径积分'
+      }
+    ];
 
-<div class="mt-20 reveal-item">
-<div class="flex flex-col items-center gap-2 text-gray-500">
-<span class="text-xs uppercase tracking-widest">向下滚动</span>
-<i class="fas fa-chevron-down animate-bounce text-stellar"></i>
-</div>
-</div>
-</div>
-</section>
+    // 科幻百科数据
+    const scifiEntries = [
+      {
+        id: 'interstellar',
+        name: '星际穿越',
+        emoji: '🚀',
+        description: '电影中的五维超立方体展示了高维空间的可视化，主角通过引力跨越时空传递信息。'
+      },
+      {
+        id: 'threerbody',
+        name: '三体',
+        emoji: '🌍',
+        description: '刘慈欣的杰作中包含了维度打击、智子封锁等基于高维物理的科幻概念。'
+      },
+      {
+        id: 'doctorwho',
+        name: '神秘博士',
+        emoji: '📦',
+        description: 'TARDIS 的内部比外部大，展示了高维空间折叠的概念。'
+      },
+      {
+        id: 'marvel',
+        name: '漫威宇宙',
+        emoji: '💎',
+        description: '无限宝石分别控制空间、时间、现实、力量、心灵和灵魂，对应不同维度的力量。'
+      }
+    ];
 
-<!-- 详细介绍区域 -->
-<section id="intro" class="py-24 px-4">
-<div class="max-w-6xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-book-open text-aurora mr-3"></i>
-维度的起源与意义
-</h2>
-<p class="text-gray-400">为什么我们要探索维度？这不仅是物理学，更是哲学</p>
-</div>
+    // 渲染维度卡片
+    function renderDimensions() {
+      const grid = document.getElementById('dimension-grid');
+      grid.innerHTML = dimensions.map(dim => `
+        <div class="dimension-card fade-in" onclick="showDimensionDetail(${dim.number})">
+          <span class="dimension-emoji">${dim.emoji}</span>
+          <div class="dimension-number">${dim.number}D</div>
+          <h3 class="dimension-name">${dim.name}</h3>
+          <div class="dimension-chinese">${dim.chineseName}</div>
+          <p class="dimension-description">${dim.description}</p>
+        </div>
+      `).join('');
+    }
 
-<div class="grid lg:grid-cols-2 gap-8 mb-16">
-<!-- 左侧：故事性介绍 -->
-<div class="glass-panel rounded-3xl p-8 reveal-item">
-<h3 class="font-display text-xl font-bold text-stellar mb-6 flex items-center gap-3">
-<span class="w-8 h-8 rounded-lg bg-stellar/20 flex items-center justify-center text-sm">1</span>
-一个关于"蚂蚁"的思考实验
-</h3>
-<div class="space-y-4 text-gray-300 leading-relaxed">
-<p>
-想象你是一只生活在<span class="text-stellar font-medium">纸张表面</span>的蚂蚁。你的世界只有前后左右，没有"上下"的概念。如果有人把纸张卷成一个圆筒，你依然可以在上面爬行，但你永远无法理解为什么有些路会"绕回来"。
-</p>
-<p>
-这就是<span class="text-aurora font-medium">维度的力量</span>——它决定了生物感知世界的方式。我们人类生活在三维空间里，就像那只蚂蚁，可能正被更高维度的"卷曲"所包围，却浑然不知。
-</p>
-<p>
-爱因斯坦告诉我们，时间也是一维。于是我们成了四维生物，但只能沿着时间单向移动，就像在一条只能前进的高速公路上开车。
-</p>
-<div class="mt-6 p-4 rounded-xl bg-stellar/5 border border-stellar/20">
-<p class="text-sm text-gray-400">
-<i class="fas fa-lightbulb text-quasar mr-2"></i>
-<strong class="text-white">核心问题：</strong>
-如果存在第五维、第六维...那会是什么样子？我们能否像穿越空间一样穿越时间？
-</p>
-</div>
-</div>
-</div>
+    // 渲染理论卡片
+    function renderTheories() {
+      const grid = document.getElementById('theory-grid');
+      grid.innerHTML = theories.map(theory => `
+        <div class="theory-card fade-in">
+          <div class="theory-emoji">${theory.emoji}</div>
+          <h3 class="theory-name">${theory.name}</h3>
+          <p class="theory-description">${theory.description}</p>
+        </div>
+      `).join('');
+    }
 
-<!-- 右侧：科学意义 -->
-<div class="glass-panel rounded-3xl p-8 reveal-item">
-<h3 class="font-display text-xl font-bold text-aurora mb-6 flex items-center gap-3">
-<span class="w-8 h-8 rounded-lg bg-aurora/20 flex items-center justify-center text-sm">2</span>
-为什么科学家相信有高维？
-</h3>
-<div class="space-y-4 text-gray-300 leading-relaxed">
-<p>
-在经典物理学中，三维空间 + 一维时间似乎已经足够描述我们的宇宙。但当物理学家试图统一<span class="text-nova font-medium">量子力学</span>和<span class="text-nova font-medium">广义相对论</span>时，问题出现了。
-</p>
-<p>
-弦理论——目前最有希望的"万有理论"候选者——在数学上要求宇宙必须有<span class="text-stellar font-medium">10 个空间维度</span>加 1 个时间维度，共 11 维。这不是科幻，而是数学上的必然。
-</p>
-<div class="grid grid-cols-2 gap-4 mt-6">
-<div class="p-4 rounded-xl bg-gradient-to-br from-stellar/10 to-transparent border border-stellar/20 text-center">
-<div class="text-2xl font-display font-bold text-stellar">10<sup>27</sup></div>
-<div class="text-xs text-gray-400 mt-1">宇宙中的粒子数</div>
-</div>
-<div class="p-4 rounded-xl bg-gradient-to-br from-aurora/10 to-transparent border border-aurora/20 text-center">
-<div class="text-2xl font-display font-bold text-aurora">11</div>
-<div class="text-xs text-gray-400 mt-1">M 理论预言的维度</div>
-</div>
-</div>
-<p class="text-sm text-gray-500 mt-4">
-<i class="fas fa-info-circle mr-1"></i>
-那些"额外"的维度可能卷曲在普朗克尺度（10<sup>-35</sup>米），远小于我们能观测的极限。
-</p>
-</div>
-</div>
-</div>
+    // 渲染科学家卡片
+    function renderScientists() {
+      const grid = document.getElementById('scientist-grid');
+      grid.innerHTML = scientists.map(scientist => `
+        <div class="scientist-card fade-in">
+          <div class="scientist-emoji">${scientist.emoji}</div>
+          <h3 class="scientist-name">${scientist.name}</h3>
+          <div class="scientist-contribution">${scientist.contribution}</div>
+        </div>
+      `).join('');
+    }
 
-<!-- 维度阶梯图 -->
-<div class="glass-panel rounded-3xl p-8 reveal-item">
-<h3 class="font-display text-xl font-bold text-white mb-8 text-center">
-<i class="fas fa-layer-group text-nova mr-2"></i>
-维度阶梯：从点到无限
-</h3>
-<div class="flex flex-wrap justify-center gap-3">
-<div class="px-4 py-2 rounded-full bg-stellar/10 border border-stellar/30 text-stellar text-sm font-medium">0 维 · 点</div>
-<div class="text-gray-600 self-center">→</div>
-<div class="px-4 py-2 rounded-full bg-stellar/10 border border-stellar/30 text-stellar text-sm font-medium">1 维 · 线</div>
-<div class="text-gray-600 self-center">→</div>
-<div class="px-4 py-2 rounded-full bg-stellar/10 border border-stellar/30 text-stellar text-sm font-medium">2 维 · 面</div>
-<div class="text-gray-600 self-center">→</div>
-<div class="px-4 py-2 rounded-full bg-stellar/10 border border-stellar/30 text-stellar text-sm font-medium">3 维 · 体</div>
-<div class="text-gray-600 self-center">→</div>
-<div class="px-4 py-2 rounded-full bg-aurora/10 border border-aurora/30 text-aurora text-sm font-medium">4 维 · 时空</div>
-<div class="text-gray-600 self-center">→</div>
-<div class="px-4 py-2 rounded-full bg-nova/10 border border-nova/30 text-nova text-sm font-medium">5-6 维 · 时间线</div>
-<div class="text-gray-600 self-center">→</div>
-<div class="px-4 py-2 rounded-full bg-quasar/10 border border-quasar/30 text-quasar text-sm font-medium">7-11 维 · 多宇宙</div>
-</div>
-</div>
-</div>
-</section>
+    // 渲染科幻百科
+    function renderScifi() {
+      const grid = document.getElementById('scifi-grid');
+      grid.innerHTML = scifiEntries.map(entry => `
+        <div class="theory-card fade-in">
+          <div class="theory-emoji">${entry.emoji}</div>
+          <h3 class="theory-name">${entry.name}</h3>
+          <p class="theory-description">${entry.description}</p>
+        </div>
+      `).join('');
+    }
 
-<!-- 维度探索区域 -->
-<section id="dimensions" class="py-24 px-4">
-<div class="max-w-6xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-cubes text-stellar mr-3"></i>
-维度深度探索
-</h2>
-<p class="text-gray-400 max-w-2xl mx-auto">点击卡片查看更详细的分析，或使用右侧快速导航</p>
-</div>
+    // 显示维度详情
+    function showDimensionDetail(number) {
+      const dim = dimensions.find(d => d.number === number);
+      if (!dim) return;
 
-<div class="space-y-12" id="dimensionContainer">
-<!-- 由 JS 生成 -->
-</div>
-</div>
-</section>
+      document.getElementById('modal-title').innerHTML = `${dim.emoji} ${dim.name} (${dim.chineseName})`;
+      document.getElementById('modal-body').innerHTML = `
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="font-size: 5rem; margin-bottom: 1rem;">${dim.emoji}</div>
+          <div style="font-size: 1.5rem; color: var(--color-stellar); font-weight: bold;">${dim.number}D - ${dim.name}</div>
+          <div style="font-size: 1.2rem; color: var(--color-aurora);">${dim.chineseName}</div>
+        </div>
+        <p style="margin-bottom: 1.5rem;">${dim.description}</p>
+        <div style="background: rgba(0, 212, 255, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--color-stellar);">
+          <strong>💡 知识点：</strong><br>
+          ${getDimensionFact(number)}
+        </div>
+      `;
+      openModal();
+    }
 
-<!-- 故事和向导区域 -->
-<section class="py-24 px-4 bg-gradient-to-b from-transparent via-cosmic/50 to-transparent">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-book-open text-aurora mr-3"></i>
-维度探索者指南
-</h2>
-<p class="text-gray-400">与伟大科学家对话，踏上维度之旅</p>
-</div>
+    // 获取维度知识点
+    function getDimensionFact(number) {
+      const facts = [
+        '0 维奇点是大爆炸理论的起点，也是黑洞中心的奇点类型。',
+        '一维生物只能看到零维的"点"，就像我们看一维物体的截面。',
+        '《平面国》是一本经典的二维世界科幻小说，帮助人们理解维度概念。',
+        '我们生活在三维空间，但无法直接感知第四维度。',
+        '爱因斯坦的广义相对论将时间和空间统一为四维时空。',
+        '五维空间包含了所有可能的选择和结果，形成无限的时间线分支。',
+        '六维空间可以像折叠纸张一样折叠时间线，实现时间旅行。',
+        '七维多重宇宙中，每个宇宙都有不同的物理定律。',
+        '八维空间包含了所有可能的历史和未来的完整集合。',
+        '九维空间可以瞬间改变物理定律本身，让不可能成为可能。',
+        '弦理论认为宇宙实际上是十维的，但我们只能感知到四维。',
+        'M 理论是弦理论的终极形式，需要 11 个维度才能完整描述。'
+      ];
+      return facts[number] || '未知维度的奥秘等待探索...';
+    }
 
-<div class="grid md:grid-cols-3 gap-6 mb-8">
-<div class="md:col-span-1" id="guidePanel">
-<!-- 向导面板 -->
-</div>
-<div class="md:col-span-2">
-<div id="scientistsGallery" class="mb-6">
-<!-- 科学家画廊 -->
-</div>
-<div id="timelineContainer">
-<!-- 历史时间线 -->
-</div>
-</div>
-</div>
+    // 快速导航
+    function showQuickNav() {
+      document.getElementById('modal-title').innerHTML = '🧭 快速导航';
+      document.getElementById('modal-body').innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <button class="btn btn-primary" onclick="scrollToSection('hero')" style="justify-content: center;">🏠 首页</button>
+          <button class="btn btn-primary" onclick="scrollToSection('dimensions')" style="justify-content: center;">📐 维度</button>
+          <button class="btn btn-primary" onclick="scrollToSection('theory')" style="justify-content: center;">🎻 理论</button>
+          <button class="btn btn-primary" onclick="scrollToSection('scientists')" style="justify-content: center;">🔬 科学家</button>
+          <button class="btn btn-primary" onclick="scrollToSection('scifi')" style="justify-content: center;">👽 科幻</button>
+        </div>
+      `;
+      openModal();
+    }
 
-<!-- 互动时间线 -->
-<div id="interactiveTimeline" class="mt-8">
-<!-- 可筛选的时间线 -->
-</div>
+    // 滚动到指定区域
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        closeModal();
+      }
+    }
 
-<!-- 关键概念 -->
-<div id="conceptsContainer" class="mt-8">
-<!-- 概念卡片 -->
-</div>
-</div>
-</section>
+    // 打开模态框
+    function openModal() {
+      document.getElementById('modal-overlay').classList.add('active');
+    }
 
-<!-- 理论区域 -->
-<section id="theory" class="py-24 px-4 bg-gradient-to-b from-transparent via-cosmic/50 to-transparent">
-<div class="max-w-6xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-atom text-aurora mr-3"></i>
-理论基石
-</h2>
-<p class="text-gray-400">支撑高维物理学的科学框架</p>
-</div>
+    // 关闭模态框
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
 
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-<div class="glass-panel rounded-3xl p-6 reveal-item hover:border-aurora/30 transition-all cursor-pointer theory-card" data-theory="string">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-aurora/20 to-aurora/5 flex items-center justify-center mb-4">
-<i class="fas fa-wave-square text-aurora text-xl"></i>
-</div>
-<h3 class="font-display text-lg font-bold text-white mb-3">弦理论</h3>
-<p class="text-gray-400 text-sm leading-relaxed">
-宇宙的基本组成单元是一维的"弦"，它们的振动产生各种粒子。需要 10 维空间才能自洽。
-</p>
-<div class="mt-4 text-aurora text-xs font-medium">
-点击了解更多 <i class="fas fa-arrow-right ml-1"></i>
-</div>
-</div>
+    // 点击模态框外部关闭
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
 
-<div class="glass-panel rounded-3xl p-6 reveal-item hover:border-stellar/30 transition-all cursor-pointer theory-card" data-theory="mtheory">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-stellar/20 to-stellar/5 flex items-center justify-center mb-4">
-<i class="fas fa-project-diagram text-stellar text-xl"></i>
-</div>
-<h3 class="font-display text-lg font-bold text-white mb-3">M 理论</h3>
-<p class="text-gray-400 text-sm leading-relaxed">
-统一五种超弦理论的终极框架，预言了第 11 维度的存在，由爱德华·威滕于 1995 年提出。
-</p>
-<div class="mt-4 text-stellar text-xs font-medium">
-点击了解更多 <i class="fas fa-arrow-right ml-1"></i>
-</div>
-</div>
+    // ESC 键关闭模态框
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
 
-<div class="glass-panel rounded-3xl p-6 reveal-item hover:border-nova/30 transition-all cursor-pointer theory-card" data-theory="calabi">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-nova/20 to-nova/5 flex items-center justify-center mb-4">
-<i class="fas fa-shapes text-nova text-xl"></i>
-</div>
-<h3 class="font-display text-lg font-bold text-white mb-3">卡拉比 - 丘流形</h3>
-<p class="text-gray-400 text-sm leading-relaxed">
-额外 6 个维度卷曲成的复杂几何形状，决定了我们宇宙的基本物理常数和粒子性质。
-</p>
-<div class="mt-4 text-nova text-xs font-medium">
-点击了解更多 <i class="fas fa-arrow-right ml-1"></i>
-</div>
-</div>
+    // 页面加载完成
+    window.addEventListener('load', function() {
+      // 隐藏加载动画
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1000);
 
-<div class="glass-panel rounded-3xl p-6 reveal-item hover:border-quasar/30 transition-all cursor-pointer theory-card" data-theory="holographic">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-quasar/20 to-quasar/5 flex items-center justify-center mb-4">
-<i class="fas fa-vr-cardboard text-quasar text-xl"></i>
-</div>
-<h3 class="font-display text-lg font-bold text-white mb-3">全息原理</h3>
-<p class="text-gray-400 text-sm leading-relaxed">
-三维宇宙的信息可能被编码在二维边界上，就像全息图一样，颠覆了我们对维度的认知。
-</p>
-<div class="mt-4 text-quasar text-xs font-medium">
-点击了解更多 <i class="fas fa-arrow-right ml-1"></i>
-</div>
-</div>
+      // 渲染所有内容
+      renderDimensions();
+      renderTheories();
+      renderScientists();
+      renderScifi();
 
-<div class="glass-panel rounded-3xl p-6 reveal-item hover:border-matrix/30 transition-all cursor-pointer theory-card" data-theory="multiverse">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-matrix/20 to-matrix/5 flex items-center justify-center mb-4">
-<i class="fas fa-globe text-matrix text-xl"></i>
-</div>
-<h3 class="font-display text-lg font-bold text-white mb-3">多重宇宙</h3>
-<p class="text-gray-400 text-sm leading-relaxed">
-量子力学和宇宙学都暗示了平行宇宙的存在，每个宇宙可能有不同的物理定律。
-</p>
-<div class="mt-4 text-matrix text-xs font-medium">
-点击了解更多 <i class="fas fa-arrow-right ml-1"></i>
-</div>
-</div>
+      // 添加淡入动画
+      document.querySelectorAll('.fade-in').forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.1}s`;
+      });
 
-<div class="glass-panel rounded-3xl p-6 reveal-item hover:border-stellar/30 transition-all cursor-pointer theory-card" data-theory="wormhole">
-<div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-stellar/20 to-stellar/5 flex items-center justify-center mb-4">
-<i class="fas fa-ring text-stellar text-xl"></i>
-</div>
-<h3 class="font-display text-lg font-bold text-white mb-3">虫洞理论</h3>
-<p class="text-gray-400 text-sm leading-relaxed">
-连接时空两点的"捷径"，可能是高维空间折叠的结果，理论上允许时间旅行。
-</p>
-<div class="mt-4 text-stellar text-xs font-medium">
-点击了解更多 <i class="fas fa-arrow-right ml-1"></i>
-</div>
-</div>
-</div>
-</div>
-</section>
+      console.log('%c🚀 维度探索器已加载完成！', 'font-size: 18px; color: #00d4ff; font-weight: bold;');
+      console.log('%c🌌 开始你的维度之旅吧！', 'font-size: 14px; color: #7b2dff;');
+    });
 
-<!-- 互动区域 -->
-<section id="interactive" class="py-24 px-4">
-<div class="max-w-4xl mx-auto">
-<div class="glass-panel rounded-3xl p-8 md:p-12 reveal-item text-center">
-<h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-6">
-<i class="fas fa-gamepad text-nova mr-3"></i>
-互动体验
-</h2>
-<p class="text-gray-400 mb-8">测试你对维度的理解</p>
-<div class="flex flex-wrap justify-center gap-4">
-<button id="startQuizBtn" class="btn-cosmic bg-gradient-to-r from-nova to-quasar text-white font-semibold">
-<i class="fas fa-brain mr-2"></i>
-开始知识测验
-</button>
-<button id="toggleVisualBtn" class="btn-cosmic glass-panel text-stellar font-semibold">
-<i class="fas fa-eye mr-2"></i>
-切换视觉模式
-</button>
-</div>
-</div>
-</div>
-</section>
-
-<!-- 物理学家区域 -->
-<section class="py-24 px-4 bg-gradient-to-b from-transparent via-cosmic/50 to-transparent">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-user-astronaut text-purple-400 mr-3"></i>
-物理学先驱
-</h2>
-<p class="text-gray-400">探索维度理论的伟大科学家们</p>
-</div>
-
-<div id="physicistsContainer" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- 由 JavaScript 动态生成 -->
-</div>
-</div>
-</section>
-
-<!-- 应用领域区域 -->
-<section class="py-24 px-4 bg-gradient-to-b from-transparent via-cosmic/50 to-transparent">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-rocket text-green-400 mr-3"></i>
-前沿应用
-</h2>
-<p class="text-gray-400">维度理论在现实世界的应用</p>
-</div>
-
-<div id="applicationsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- 由 JavaScript 动态生成 -->
-</div>
-</div>
-</section>
-
-<!-- 科幻百科区域 -->
-<section id="scifi-compendium" class="py-24 px-4 bg-gradient-to-b from-transparent via-cosmic/50 to-transparent">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 reveal-item">
-<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-<i class="fas fa-book-dead text-pink-400 mr-3"></i>
-科幻百科
-</h2>
-<p class="text-gray-400">探索外星文明、未来科技与宇宙历史</p>
-</div>
-<!-- 由 JavaScript 动态生成内容 -->
-</div>
-</section>
-
-<!-- 粒子效果画布 -->
-<canvas id="particle-canvas"></canvas>
-
-<!-- 维度跃迁容器 -->
-<div id="warp-container" class="fixed inset-0 pointer-events-none z-0"></div>
-
-<!-- 页脚 -->
-<footer class="py-12 px-4 border-t border-white/5">
-<div class="max-w-6xl mx-auto text-center">
-<div class="flex justify-center gap-6 mb-6">
-<a href="#" class="text-gray-500 hover:text-stellar transition-colors"><i class="fab fa-github text-xl"></i></a>
-<a href="#" class="text-gray-500 hover:text-stellar transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-<a href="#" class="text-gray-500 hover:text-stellar transition-colors"><i class="fas fa-envelope text-xl"></i></a>
-</div>
-<p class="text-gray-500 text-sm">维度探索 - 探索宇宙的终极奥秘</p>
-<p class="text-gray-600 text-xs mt-2">基于现代物理学理论的科普项目</p>
-</div>
-</footer>
-</main>
-
-<!-- 模态框 -->
-<div id="modalOverlay" class="modal-overlay">
-<div class="modal-content glass-panel p-8">
-<div class="flex justify-between items-start mb-6">
-<h3 id="modalTitle" class="font-display text-xl font-bold text-white"></h3>
-<button id="closeModalBtn" class="text-gray-500 hover:text-white transition-colors">
-<i class="fas fa-times text-xl"></i>
-</button>
-</div>
-<div id="modalBody" class="text-gray-300 leading-relaxed"></div>
-</div>
-</div>
-
-<!-- 测验模态框 -->
-<div id="quizModal" class="modal-overlay">
-<div class="modal-content glass-panel p-8">
-<div class="flex justify-between items-start mb-6">
-<h3 class="font-display text-xl font-bold text-white">
-<i class="fas fa-brain text-nova mr-2"></i>维度知识测验
-</h3>
-<button id="closeQuizBtn" class="text-gray-500 hover:text-white transition-colors">
-<i class="fas fa-times text-xl"></i>
-</button>
-</div>
-<div id="quizContent"></div>
-</div>
-</div>
-
-<!-- 快速导航模态框 -->
-<div id="quickNavModal" class="modal-overlay">
-<div class="modal-content glass-panel p-8">
-<div class="flex justify-between items-start mb-6">
-<h3 class="font-display text-xl font-bold text-white">
-<i class="fas fa-compass text-stellar mr-2"></i>快速导航
-</h3>
-<button id="closeQuickNavBtn" class="text-gray-500 hover:text-white transition-colors">
-<i class="fas fa-times text-xl"></i>
-</button>
-</div>
-<div id="quickNavContent" class="grid grid-cols-3 md:grid-cols-4 gap-3">
-<!-- 由 JS 生成 -->
-</div>
-</div>
-</div>
-
-<!-- 返回顶部 -->
-<button id="backToTopBtn" class="fixed bottom-6 right-6 w-12 h-12 rounded-full glass-panel text-stellar opacity-0 pointer-events-none transition-all hover:bg-stellar/20 z-50" aria-label="返回顶部">
-<i class="fas fa-arrow-up"></i>
-</button>
-
-<!-- ES6 模块脚本 -->
-<script type="module" src="js/app.js"></script>
-<script>
-// 错误监控和调试
-window.addEventListener('error', function(event) {
-  console.error('全局错误:', event.message);
-  console.error('文件:', event.filename, '行:', event.lineno, '列:', event.colno);
-  console.error('错误对象:', event.error);
-  
-  // 显示错误提示
-  const errorDiv = document.createElement('div');
-  errorDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:#ff4444;color:white;padding:15px;border-radius:5px;z-index:9999;max-width:400px;box-shadow:0 2px 10px rgba(0,0,0,0.3);';
-  errorDiv.innerHTML = '<strong>❌ 加载错误</strong><br>' + event.message + '<br><small>' + event.filename + ':' + event.lineno + '</small>';
-  document.body.appendChild(errorDiv);
-});
-
-window.addEventListener('unhandledrejection', function(event) {
-  console.error('未处理的 Promise 拒绝:', event.reason);
-});
-
-console.log('%c🚀 维度探索器 v6.0 开始加载...', 'font-size:16px;font-weight:bold;color:#00d4ff');
-console.log('%c 加载科幻百科、宇宙历史、外星文明等全新内容！', 'font-size:12px;color:#7b2dff');
-</script>
+    // 导出函数到全局作用域
+    window.showDimensionDetail = showDimensionDetail;
+    window.showQuickNav = showQuickNav;
+    window.scrollToSection = scrollToSection;
+    window.closeModal = closeModal;
+  </script>
 </body>
 </html>
