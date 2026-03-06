@@ -611,7 +611,326 @@
       color: #606060;
       font-size: 0.9rem;
     }
-  </style>
+
+    /* 维度详情界面 */
+    .dimension-detail-view {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--color-void), var(--color-cosmic), var(--color-nebula));
+      z-index: 3000;
+      overflow-y: auto;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .dimension-detail-view.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .detail-header {
+      position: sticky;
+      top: 0;
+      background: rgba(3, 3, 8, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      padding: 1rem 2rem;
+      z-index: 100;
+      box-shadow: var(--glow-md);
+    }
+
+    .detail-header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .detail-back-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(0, 212, 255, 0.1);
+      border: 2px solid var(--color-stellar);
+      border-radius: 50px;
+      color: var(--color-stellar);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .detail-back-btn:hover {
+      background: rgba(0, 212, 255, 0.2);
+      transform: translateX(-5px);
+    }
+
+    .detail-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .detail-hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    }
+
+    .detail-emoji {
+      font-size: 10rem;
+      margin-bottom: 2rem;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .detail-number-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora));
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .detail-names {
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-name-en {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-name-cn {
+      font-size: 2rem;
+      color: var(--color-aurora);
+    }
+
+    .detail-description {
+      font-size: 1.3rem;
+      color: #a0a0a0;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    .detail-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .detail-section {
+      margin-bottom: 3rem;
+    }
+
+    .detail-section-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-stellar);
+    }
+
+    .detail-card {
+      background: rgba(10, 10, 31, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-card:hover {
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: var(--glow-md);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--color-stellar), var(--color-aurora));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #808080;
+      font-size: 0.9rem;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .info-content {
+      flex: 1;
+    }
+
+    .info-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: white;
+    }
+
+    .info-text {
+      color: #808080;
+      font-size: 0.95rem;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .related-card {
+      background: rgba(10, 10, 31, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .related-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: var(--glow-md);
+    }
+
+    .related-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .related-name {
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .related-relation {
+      font-size: 0.85rem;
+      color: var(--color-stellar);
+      margin-bottom: 0.5rem;
+    }
+
+    .related-desc {
+      font-size: 0.9rem;
+      color: #808080;
+    }
+
+    .knowledge-box {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 45, 255, 0.1));
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .knowledge-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--color-stellar), var(--color-aurora));
+      border-radius: 3px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      background: var(--color-stellar);
+      border-radius: 50%;
+      box-shadow: var(--glow-md);
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-year {
+      font-weight: bold;
+      color: var(--color-stellar);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-event {
+      color: #a0a0a0;
+    }
 </head>
 <body>
   <!-- 加载动画 -->
@@ -742,93 +1061,428 @@
     </div>
   </div>
 
+  <!-- 维度详情界面 -->
+  <div class="dimension-detail-view" id="dimension-detail-view">
+    <!-- 详情头部 -->
+    <div class="detail-header">
+      <div class="detail-header-content">
+        <button class="detail-back-btn" onclick="closeDimensionDetail()">
+          <span>⬅️</span>
+          <span>返回主界面</span>
+        </button>
+        <div class="detail-title" id="detail-header-title">维度详情</div>
+        <div style="width: 150px;"></div>
+      </div>
+    </div>
+
+    <!-- 详情英雄区域 -->
+    <div class="detail-hero">
+      <span class="detail-emoji" id="detail-emoji">🌌</span>
+      <div class="detail-number-badge" id="detail-number-badge">0D</div>
+      <div class="detail-names">
+        <div class="detail-name-en" id="detail-name-en">Singularity</div>
+        <div class="detail-name-cn" id="detail-name-cn">奇点</div>
+      </div>
+      <p class="detail-description" id="detail-description">
+        零维空间，一个没有长度、宽度、高度的点。所有维度都从这里开始，它是宇宙的起点，也是大爆炸之前的状态。
+      </p>
+    </div>
+
+    <!-- 详情内容 -->
+    <div class="detail-content">
+      <!-- 基础信息 -->
+      <section class="detail-section">
+        <h2 class="detail-section-title">
+          <span>📊</span> 基础数据
+        </h2>
+        <div class="detail-card">
+          <div class="stats-grid" id="detail-stats">
+            <!-- 动态生成统计数据 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 详细信息 -->
+      <section class="detail-section">
+        <h2 class="detail-section-title">
+          <span>📖</span> 详细信息
+        </h2>
+        <div class="detail-card">
+          <ul class="info-list" id="detail-info">
+            <!-- 动态生成信息列表 -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- 历史发展 -->
+      <section class="detail-section">
+        <h2 class="detail-section-title">
+          <span>📜</span> 历史发展
+        </h2>
+        <div class="detail-card">
+          <div class="timeline" id="detail-timeline">
+            <!-- 动态生成时间线 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 关联维度 -->
+      <section class="detail-section">
+        <h2 class="detail-section-title">
+          <span>🔗</span> 关联维度
+        </h2>
+        <div class="detail-card">
+          <div class="related-grid" id="detail-related">
+            <!-- 动态生成关联维度 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 知识点 -->
+      <section class="detail-section">
+        <h2 class="detail-section-title">
+          <span>💡</span> 知识拓展
+        </h2>
+        <div class="knowledge-box">
+          <div class="knowledge-title">
+            <span>🎓</span> 深度知识点
+          </div>
+          <p id="detail-knowledge" style="color: #a0a0a0; line-height: 1.8;">
+            <!-- 动态生成知识点 -->
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+
   <!-- JavaScript -->
   <script type="module">
-    // 维度数据
+    // 维度数据（扩展版）
     const dimensions = [
       {
         number: 0,
         name: 'Singularity',
         chineseName: '奇点',
         emoji: '⚫',
-        description: '零维空间，一个没有长度、宽度、高度的点。所有维度都从这里开始，它是宇宙的起点，也是大爆炸之前的状态。'
+        description: '零维空间，一个没有长度、宽度、高度的点。所有维度都从这里开始，它是宇宙的起点，也是大爆炸之前的状态。',
+        stats: {
+          coordinates: '0',
+          degrees: '0°',
+          complexity: '极简',
+          visibility: '不可见'
+        },
+        info: [
+          { icon: '📍', title: '几何特性', text: '没有长度、宽度、高度，仅表示位置' },
+          { icon: '🔬', title: '物理意义', text: '量子引力理论中的基本单元' },
+          { icon: '💫', title: '宇宙学', text: '大爆炸奇点、黑洞奇点' },
+          { icon: '🎯', title: '数学描述', text: '欧几里得空间的原点 (0,0,0)' }
+        ],
+        timeline: [
+          { year: '公元前 300 年', event: '欧几里得定义几何点为"没有部分的东西"' },
+          { year: '1687 年', event: '牛顿在《原理》中将点作为力学基本单元' },
+          { year: '1915 年', event: '爱因斯坦广义相对论预言引力奇点' },
+          { year: '1965 年', event: '彭罗斯证明黑洞奇点定理' },
+          { year: '现代', event: '弦理论认为奇点可能被量子效应平滑' }
+        ],
+        related: [
+          { number: 1, relation: '向上发展', desc: '点的移动形成线' },
+          { number: 3, relation: '构成基础', desc: '点构成三维空间的基本元素' },
+          { number: 4, relation: '时空起点', desc: '奇点是时空的起始点' }
+        ],
+        knowledge: '在数学中，点是几何学的基本概念，没有大小、形状或维度。在物理学中，奇点通常指引力场或时空曲率发散的区域。根据霍金和彭罗斯的奇点定理，在广义相对论框架下，宇宙大爆炸必然始于一个奇点。然而，量子引力理论（如弦理论）认为，在普朗克尺度下，奇点可能被量子涨落所"模糊"，避免无限大的出现。'
       },
       {
         number: 1,
         name: 'Line',
         chineseName: '线',
         emoji: '📏',
-        description: '一维空间，只有长度的直线。连接两个点形成一条线，这是一维生物所能感知的全部世界。'
+        description: '一维空间，只有长度的直线。连接两个点形成一条线，这是一维生物所能感知的全部世界。',
+        stats: {
+          coordinates: '1',
+          degrees: '180°',
+          complexity: '简单',
+          visibility: '理论可见'
+        },
+        info: [
+          { icon: '📐', title: '几何特性', text: '只有长度，没有宽度和高度' },
+          { icon: '🔢', title: '坐标系统', text: '仅需一个数值即可定位' },
+          { icon: '🧬', title: '生命形式', text: '一维生物只能感知两个方向' },
+          { icon: '📊', title: '自由度', text: '只能沿直线前后移动' }
+        ],
+        timeline: [
+          { year: '公元前 300 年', event: '欧几里得定义线为"没有宽度的长度"' },
+          { year: '1884 年', event: '《平面国》出版，探讨维度概念' },
+          { year: '1950 年代', event: '拓扑学发展，研究线的连续变形' },
+          { year: '现代', event: '弦理论中一维弦是基本粒子' }
+        ],
+        related: [
+          { number: 0, relation: '构成基础', desc: '无数点组成线' },
+          { number: 2, relation: '向上发展', desc: '线的平移形成面' },
+          { number: 5, relation: '可能性', desc: '一维世界的时间线分支' }
+        ],
+        knowledge: '一维空间是最简单的几何空间，只有长度这一个维度。在一维世界中，生物只能感知前后两个方向，无法理解"左右"或"上下"的概念。有趣的是，现代弦理论认为，宇宙的基本组成单元可能是一维的"弦"，而非零维的点粒子。这些弦在十维时空中振动，产生了我们观测到的各种基本粒子。'
       },
       {
         number: 2,
         name: 'Plane',
         chineseName: '面',
         emoji: '📐',
-        description: '二维空间，由无数条线组成的平面。就像一张纸上的画，二维生物只能看到线条的截面。'
+        description: '二维空间，由无数条线组成的平面。就像一张纸上的画，二维生物只能看到线条的截面。',
+        stats: { coordinates: '2', degrees: '360°', complexity: '中等', visibility: '平面可见' },
+        info: [
+          { icon: '🔲', title: '几何特性', text: '有长度和宽度，没有高度' },
+          { icon: '🎨', title: '视觉限制', text: '二维生物只能看到一维截面' },
+          { icon: '📱', title: '现实应用', text: '计算机屏幕、纸张都是二维' },
+          { icon: '🔬', title: '自由度', text: '可以在平面内任意移动' }
+        ],
+        timeline: [
+          { year: '1884 年', event: '《平面国》出版，经典二维世界构想' },
+          { year: '1960 年代', event: '计算机图形学开始研究二维渲染' },
+          { year: '1980 年代', event: '电子游戏普及二维平面世界' },
+          { year: '现代', event: '全息技术突破二维显示限制' }
+        ],
+        related: [
+          { number: 1, relation: '构成基础', desc: '线的平移形成面' },
+          { number: 3, relation: '向上发展', desc: '面的堆叠形成体' },
+          { number: 6, relation: '全息原理', desc: '二维边界编码三维信息' }
+        ],
+        knowledge: '二维空间是我们能够直观理解的低维空间。经典科幻小说《平面国》描述了二维世界中生物的生活：它们只能看到其他物体的一维截面（线条），无法理解"高度"这个概念。有趣的是，全息原理认为，我们生活的三维宇宙的所有信息，可能被编码在一个二维边界上，就像全息图一样。'
       },
       {
         number: 3,
         name: 'Space',
         chineseName: '体',
         emoji: '🧊',
-        description: '三维空间，我们生活的世界。由无数个平面堆叠而成，拥有长度、宽度和高度。'
+        description: '三维空间，我们生活的世界。由无数个平面堆叠而成，拥有长度、宽度和高度。',
+        stats: { coordinates: '3', degrees: '720°', complexity: '复杂', visibility: '完全可见' },
+        info: [
+          { icon: '🌍', title: '几何特性', text: '有长度、宽度和高度' },
+          { icon: '🧍', title: '生命形式', text: '人类等生物生活在三维空间' },
+          { icon: '📐', title: '坐标系', text: '需要三个数值定位 (x,y,z)' },
+          { icon: '🎮', title: '自由度', text: '可以前后、左右、上下移动' }
+        ],
+        timeline: [
+          { year: '公元前 300 年', event: '欧几里得建立三维几何体系' },
+          { year: '1637 年', event: '笛卡尔发明三维直角坐标系' },
+          { year: '1827 年', event: '高斯发展微分几何研究曲面' },
+          { year: '1915 年', event: '爱因斯坦将三维扩展为四维时空' }
+        ],
+        related: [
+          { number: 2, relation: '构成基础', desc: '面的堆叠形成体' },
+          { number: 4, relation: '向上发展', desc: '三维加时间形成时空' },
+          { number: 7, relation: '多重宇宙', desc: '无数个三维宇宙的集合' }
+        ],
+        knowledge: '三维空间是我们日常经验的世界。我们能够自由地在前后、左右、上下三个方向移动。所有宏观物体都占据三维空间。根据弦理论，虽然我们只能感知到三个空间维度，但宇宙实际上可能有更多蜷曲的额外维度，只是在普朗克尺度下无法被直接观测到。'
       },
       {
         number: 4,
         name: 'Spacetime',
         chineseName: '时空',
         emoji: '⏳',
-        description: '四维时空，在三维空间的基础上加上时间维度。爱因斯坦的相对论揭示了时间和空间的统一性。'
+        description: '四维时空，在三维空间的基础上加上时间维度。爱因斯坦的相对论揭示了时间和空间的统一性。',
+        stats: { coordinates: '4', degrees: '∞', complexity: '极复杂', visibility: '部分感知' },
+        info: [
+          { icon: '⚡', title: '几何特性', text: '三维空间 + 一维时间' },
+          { icon: '🔭', title: '物理理论', text: '狭义相对论和广义相对论' },
+          { icon: '🌌', title: '宇宙结构', text: '时空可以弯曲和膨胀' },
+          { icon: '⏰', title: '时间特性', text: '时间流逝速度依赖于引力场' }
+        ],
+        timeline: [
+          { year: '1905 年', event: '爱因斯坦发表狭义相对论' },
+          { year: '1908 年', event: '闵可夫斯基提出四维时空概念' },
+          { year: '1915 年', event: '广义相对论揭示时空弯曲' },
+          { year: '1919 年', event: '日食观测证实光线弯曲' },
+          { year: '2015 年', event: 'LIGO 首次直接探测到引力波' }
+        ],
+        related: [
+          { number: 3, relation: '构成基础', desc: '三维空间是时空的基础' },
+          { number: 5, relation: '可能性', desc: '时空中的选择分支' },
+          { number: 6, relation: '时空折叠', desc: '高维可以折叠时空' }
+        ],
+        knowledge: '四维时空是爱因斯坦相对论的核心概念。时间和空间不再是独立的，而是统一为时空连续体。在强引力场附近，时间会变慢（引力时间膨胀）。GPS 卫星必须考虑相对论效应，否则每天会产生约 10 公里的定位误差。广义相对论还预言了黑洞、引力波和宇宙膨胀，这些都已被观测证实。'
       },
       {
         number: 5,
         name: 'Probability',
         chineseName: '可能性',
         emoji: '🌀',
-        description: '五维空间，包含所有可能的选择分支。每一个决定都会创造新的时间线，形成无限的可能性。'
+        description: '五维空间，包含所有可能的选择分支。每一个决定都会创造新的时间线，形成无限的可能性。',
+        stats: { coordinates: '5', degrees: '∞²', complexity: '超复杂', visibility: '不可感知' },
+        info: [
+          { icon: '🔀', title: '核心概念', text: '所有可能的时间线分支' },
+          { icon: '🎲', title: '量子力学', text: '测量导致波函数坍缩' },
+          { icon: '🌳', title: '结构形态', text: '树状分支的时间线' },
+          { icon: '🌀', title: '自由度', text: '可以在不同时间线间跳跃' }
+        ],
+        timeline: [
+          { year: '1954 年', event: '埃弗雷特提出多世界诠释' },
+          { year: '1957 年', event: '《相对态表述》发表' },
+          { year: '1970 年代', event: '德威特推广多世界概念' },
+          { year: '现代', event: '量子计算验证叠加态存在' }
+        ],
+        related: [
+          { number: 4, relation: '构成基础', desc: '时空的分支形成五维' },
+          { number: 6, relation: '向上发展', desc: '可以折叠不同时间线' },
+          { number: 9, relation: '改变定律', desc: '九维可以改变概率规则' }
+        ],
+        knowledge: '五维空间包含了所有可能的历史和未来。根据量子力学的多世界诠释，每当一个量子系统面临多种可能的结果时，宇宙就会"分裂"成多个分支，每个分支对应一个可能的结果。这意味着有无数个平行宇宙，每个宇宙都有不同的历史。你做的每一个选择，都在创造新的时间线。'
       },
       {
         number: 6,
         name: 'Cosmic Web',
         chineseName: '宇宙网',
         emoji: '🌌',
-        description: '六维空间，可以折叠和跳跃不同的时间线。就像把纸折叠起来让两点靠近一样。'
+        description: '六维空间，可以折叠和跳跃不同的时间线。就像把纸折叠起来让两点靠近一样。',
+        stats: { coordinates: '6', degrees: '∞³', complexity: '难以想象', visibility: '数学存在' },
+        info: [
+          { icon: '📄', title: '核心能力', text: '折叠时间线实现跳跃' },
+          { icon: '🚪', title: '虫洞概念', text: '连接遥远时空的捷径' },
+          { icon: '🔬', title: '理论依据', text: '广义相对论允许虫洞存在' },
+          { icon: '⚠️', title: '稳定性', text: '需要负能量维持虫洞开放' }
+        ],
+        timeline: [
+          { year: '1916 年', event: '史瓦西发现黑洞解' },
+          { year: '1935 年', event: '爱因斯坦 - 罗森桥概念提出' },
+          { year: '1960 年代', event: '惠勒命名"虫洞"' },
+          { year: '1988 年', event: '索恩研究可穿越虫洞' },
+          { year: '2019 年', event: '人类首张黑洞照片发布' }
+        ],
+        related: [
+          { number: 5, relation: '构成基础', desc: '折叠五维时间线' },
+          { number: 7, relation: '向上发展', desc: '连接不同宇宙' },
+          { number: 10, relation: '终极形态', desc: '十维包含所有虫洞' }
+        ],
+        knowledge: '六维空间允许我们在不同的时间线之间"折叠"和"跳跃"。想象一张纸上有两个点，在二维平面上它们相距很远，但如果把纸折叠起来，两点就可以非常接近。类似地，六维生物可以折叠五维的时间线，实现瞬间跨越不同历史。虫洞（爱因斯坦 - 罗森桥）就是这种概念在四维时空中的体现。'
       },
       {
         number: 7,
         name: 'Multiverse',
         chineseName: '多宇宙',
         emoji: '🔮',
-        description: '七维空间，包含所有可能宇宙的集合。每个宇宙都有不同的物理定律和初始条件。'
+        description: '七维空间，包含所有可能宇宙的集合。每个宇宙都有不同的物理定律和初始条件。',
+        stats: { coordinates: '7', degrees: '∞⁴', complexity: '超越想象', visibility: '纯理论' },
+        info: [
+          { icon: '🌐', title: '核心概念', text: '所有可能宇宙的集合' },
+          { icon: '⚛️', title: '物理定律', text: '每个宇宙定律可能不同' },
+          { icon: '🎯', title: '初始条件', text: '大爆炸参数各不相同' },
+          { icon: '♾️', title: '规模', text: '包含无限个宇宙' }
+        ],
+        timeline: [
+          { year: '1952 年', event: '薛定谔提出多世界概念' },
+          { year: '1980 年代', event: '暴胀理论预言多重宇宙' },
+          { year: '2003 年', event: '林德提出永恒暴胀模型' },
+          { year: '现代', event: '弦理论景观预言 10^500 个宇宙' }
+        ],
+        related: [
+          { number: 6, relation: '构成基础', desc: '连接不同宇宙' },
+          { number: 8, relation: '向上发展', desc: '所有历史的集合' },
+          { number: 11, relation: '终极统一', desc: '十一维包含所有宇宙' }
+        ],
+        knowledge: '七维空间包含了所有可能的宇宙，每个宇宙都有不同的物理常数和初始条件。在某些宇宙中，光速可能更快，引力可能更强，甚至可能有完全不同的基本力。弦理论的"景观"概念认为，存在大约 10^500 个不同的真空态，每个对应一个可能的宇宙。我们的宇宙只是这个巨大"多重宇宙"中的一个微小气泡。'
       },
       {
         number: 8,
         name: 'Infinity',
         chineseName: '无限',
         emoji: '♾️',
-        description: '八维空间，所有可能的历史和未来的完整集合。包含了无限个七维多重宇宙。'
+        description: '八维空间，所有可能的历史和未来的完整集合。包含了无限个七维多重宇宙。',
+        stats: { coordinates: '8', degrees: '∞⁵', complexity: '无限复杂', visibility: '数学抽象' },
+        info: [
+          { icon: '📚', title: '核心概念', text: '所有历史的完整集合' },
+          { icon: '🔢', title: '数学描述', text: '超限数的概念' },
+          { icon: '🌌', title: '规模', text: '包含无限个七维宇宙' },
+          { icon: '🎲', title: '可能性', text: '所有可能都已成为现实' }
+        ],
+        timeline: [
+          { year: '1874 年', event: '康托尔创立集合论' },
+          { year: '1891 年', event: '对角线论证证明无限有等级' },
+          { year: '1900 年', event: '希尔伯特提出无限旅馆悖论' },
+          { year: '现代', event: '多重宇宙理论发展' }
+        ],
+        related: [
+          { number: 7, relation: '构成基础', desc: '多重宇宙的集合' },
+          { number: 9, relation: '向上发展', desc: '可以改变物理定律' },
+          { number: 10, relation: '终极顶点', desc: '十维是所有可能性顶点' }
+        ],
+        knowledge: '八维空间包含了所有可能的历史和未来的完整集合。这已经超越了人类的直观理解能力。数学家康托尔证明了无限也有不同的"等级"：可数无限（如自然数）和不可数无限（如实数）。八维空间的"无限"是更高等级的无限，包含了所有七维多重宇宙的所有可能历史。这是一个难以想象的巨大存在。'
       },
       {
         number: 9,
         name: 'Miracle',
         chineseName: '奇迹',
         emoji: '✨',
-        description: '九维空间，可以瞬间改变物理定律本身。在这里，不可能成为可能。'
+        description: '九维空间，可以瞬间改变物理定律本身。在这里，不可能成为可能。',
+        stats: { coordinates: '9', degrees: '∞⁶', complexity: '无法理解', visibility: '纯概念' },
+        info: [
+          { icon: '⚡', title: '核心能力', text: '改变物理定律' },
+          { icon: '🎨', title: '自由度', text: '可以创造新物理规则' },
+          { icon: '🔮', title: '现实操控', text: '修改自然常数' },
+          { icon: '💫', title: '可能性', text: '不可能成为可能' }
+        ],
+        timeline: [
+          { year: '1900 年', event: '普朗克发现量子化' },
+          { year: '1927 年', event: '海森堡提出不确定性原理' },
+          { year: '1964 年', event: '贝尔不等式发表' },
+          { year: '现代', event: '量子纠缠实验验证' }
+        ],
+        related: [
+          { number: 8, relation: '构成基础', desc: '所有历史的集合' },
+          { number: 10, relation: '向上发展', desc: '所有可能性的顶点' },
+          { number: 5, relation: '概率操控', desc: '可以改变概率规则' }
+        ],
+        knowledge: '九维空间拥有改变物理定律本身的能力。在我们的宇宙中，光速是恒定的，引力常数是固定的，但这些在九维空间中都可以被修改。这就像电子游戏的管理员可以修改游戏规则一样。量子力学中的一些现象，如量子隧穿（粒子穿过不可能越过的势垒），可能就是九维效应在我们三维世界的微弱体现。'
       },
       {
         number: 10,
         name: 'Ultimate',
         chineseName: '终极',
         emoji: '🌟',
-        description: '十维空间，所有可能性的顶点。弦理论认为我们的宇宙实际上是十维的。'
+        description: '十维空间，所有可能性的顶点。弦理论认为我们的宇宙实际上是十维的。',
+        stats: { coordinates: '10', degrees: '∞⁷', complexity: '终极复杂', visibility: '弦理论' },
+        info: [
+          { icon: '🎻', title: '弦理论', text: '宇宙是十维的' },
+          { icon: '🌀', title: '额外维度', text: '6 个维度蜷曲在普朗克尺度' },
+          { icon: '🔬', title: '科学依据', text: 'M 理论需要 10 个维度' },
+          { icon: '👁️', title: '感知限制', text: '我们只能看到 4 个维度' }
+        ],
+        timeline: [
+          { year: '1968 年', event: '维尼齐亚诺发现弦理论雏形' },
+          { year: '1984 年', event: '第一次弦理论革命' },
+          { year: '1995 年', event: '威滕提出 M 理论' },
+          { year: '现代', event: '寻找额外维度的实验' }
+        ],
+        related: [
+          { number: 9, relation: '构成基础', desc: '九维的扩展' },
+          { number: 11, relation: '向上发展', desc: 'M 理论的 11 维' },
+          { number: 3, relation: '感知限制', desc: '我们只能感知 3 个空间维' }
+        ],
+        knowledge: '根据弦理论，我们的宇宙实际上是十维的：9 个空间维度 + 1 个时间维度。但为什么我们只能感知到 3 个空间维度？因为另外 6 个维度被"紧致化"了——它们蜷曲在极小的普朗克尺度（10^-35 米）下，无法被直接观测。这些额外维度的几何形状（卡拉比 - 丘流形）决定了我们宇宙的物理定律和基本粒子性质。'
       },
       {
         number: 11,
         name: 'Omniscient',
         chineseName: '全知',
         emoji: '👁️',
-        description: '十一维空间，M 理论的巅峰。所有维度、所有可能性、所有宇宙的终极统一。'
+        description: '十一维空间，M 理论的巅峰。所有维度、所有可能性、所有宇宙的终极统一。',
+        stats: { coordinates: '11', degrees: '∞⁸', complexity: '绝对终极', visibility: 'M 理论' },
+        info: [
+          { icon: '🔷', title: 'M 理论', text: '统一五种弦理论' },
+          { icon: '🌌', title: '宇宙本质', text: '所有现实的统一' },
+          { icon: '♾️', title: '包含一切', text: '所有维度、宇宙、历史' },
+          { icon: '👁️', title: '全知视角', text: '超越所有限制' }
+        ],
+        timeline: [
+          { year: '1991 年', event: '发现五种不同的弦理论' },
+          { year: '1995 年', event: '威滕提出 M 理论统一框架' },
+          { year: '1990 年代末', event: 'AdS/CFT 对应提出' },
+          { year: '现代', event: '探索 M 理论的数学结构' }
+        ],
+        related: [
+          { number: 10, relation: '构成基础', desc: '十维的扩展' },
+          { number: 0, relation: '循环统一', desc: '终点回到起点' },
+          { number: 7, relation: '包含所有', desc: '所有多重宇宙的集合' }
+        ],
+        knowledge: '十一维空间是 M 理论的巅峰，也是目前物理学理论中维度的上限。M 理论统一了五种不同的超弦理论，揭示它们只是同一理论在不同条件下的表现。在十一维中，基本的对象不再是弦，而是更高维的"膜"（brane）。我们的整个宇宙可能就是一个漂浮在十一维空间中的三维膜。这是一个终极的视角，包含了所有维度、所有可能性、所有宇宙的完整统一。'
       }
     ];
 
@@ -972,7 +1626,7 @@
       `).join('');
     }
 
-    // 显示维度详情
+    // 显示维度详情（简化版模态框）
     function showDimensionDetail(number) {
       const dim = dimensions.find(d => d.number === number);
       if (!dim) return;
@@ -987,13 +1641,112 @@
         <p style="margin-bottom: 1.5rem;">${dim.description}</p>
         <div style="background: rgba(0, 212, 255, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--color-stellar);">
           <strong>💡 知识点：</strong><br>
-          ${getDimensionFact(number)}
+          ${dim.knowledge || getDimensionFact(number)}
+        </div>
+        <div style="margin-top: 2rem; text-align: center;">
+          <button class="btn btn-primary" onclick="showFullDimensionDetail(${dim.number})" style="width: 100%; justify-content: center;">
+            📖 查看完整详情页
+          </button>
         </div>
       `;
       openModal();
     }
 
-    // 获取维度知识点
+    // 显示完整维度详情界面
+    function showFullDimensionDetail(number) {
+      const dim = dimensions.find(d => d.number === number);
+      if (!dim) return;
+
+      // 关闭模态框
+      closeModal();
+
+      // 填充详情界面数据
+      document.getElementById('detail-emoji').textContent = dim.emoji;
+      document.getElementById('detail-number-badge').textContent = `${dim.number}D`;
+      document.getElementById('detail-name-en').textContent = dim.name;
+      document.getElementById('detail-name-cn').textContent = dim.chineseName;
+      document.getElementById('detail-description').textContent = dim.description;
+      document.getElementById('detail-header-title').textContent = `${dim.number}D - ${dim.chineseName}`;
+
+      // 渲染统计数据
+      const statsHTML = dim.stats ? Object.entries(dim.stats).map(([key, value]) => `
+        <div class="stat-card">
+          <div class="stat-value">${value}</div>
+          <div class="stat-label">${getStatLabel(key)}</div>
+        </div>
+      `).join('') : '<p style="color: #808080; text-align: center;">暂无统计数据</p>';
+      document.getElementById('detail-stats').innerHTML = statsHTML;
+
+      // 渲染详细信息
+      const infoHTML = dim.info ? dim.info.map(item => `
+        <li>
+          <span class="info-icon">${item.icon}</span>
+          <div class="info-content">
+            <div class="info-title">${item.title}</div>
+            <div class="info-text">${item.text}</div>
+          </div>
+        </li>
+      `).join('') : '<p style="color: #808080;">暂无详细信息</p>';
+      document.getElementById('detail-info').innerHTML = infoHTML;
+
+      // 渲染时间线
+      const timelineHTML = dim.timeline ? dim.timeline.map(item => `
+        <div class="timeline-item">
+          <div class="timeline-year">${item.year}</div>
+          <div class="timeline-event">${item.event}</div>
+        </div>
+      `).join('') : '<p style="color: #808080;">暂无历史发展记录</p>';
+      document.getElementById('detail-timeline').innerHTML = timelineHTML;
+
+      // 渲染关联维度
+      const relatedHTML = dim.related ? dim.related.map(item => {
+        const relatedDim = dimensions.find(d => d.number === item.number);
+        if (!relatedDim) return '';
+        return `
+          <div class="related-card" onclick="showFullDimensionDetail(${item.number})">
+            <div class="related-emoji">${relatedDim.emoji}</div>
+            <div class="related-name">${relatedDim.number}D - ${relatedDim.chineseName}</div>
+            <div class="related-relation">${item.relation}</div>
+            <div class="related-desc">${item.desc}</div>
+          </div>
+        `;
+      }).join('') : '<p style="color: #808080;">暂无关联维度</p>';
+      document.getElementById('detail-related').innerHTML = relatedHTML;
+
+      // 渲染知识点
+      document.getElementById('detail-knowledge').textContent = dim.knowledge || '暂无深度知识点';
+
+      // 显示详情界面
+      const detailView = document.getElementById('dimension-detail-view');
+      detailView.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // 滚动到顶部
+      detailView.scrollTop = 0;
+
+      console.log(`📖 显示维度 ${dim.number} 的详情界面`);
+    }
+
+    // 关闭维度详情界面
+    function closeDimensionDetail() {
+      const detailView = document.getElementById('dimension-detail-view');
+      detailView.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      console.log('❌ 关闭详情界面');
+    }
+
+    // 获取统计标签中文
+    function getStatLabel(key) {
+      const labels = {
+        coordinates: '坐标数',
+        degrees: '自由度',
+        complexity: '复杂度',
+        visibility: '可见性'
+      };
+      return labels[key] || key;
+    }
+
+    // 获取维度知识点（备用）
     function getDimensionFact(number) {
       const facts = [
         '0 维奇点是大爆炸理论的起点，也是黑洞中心的奇点类型。',
@@ -1084,6 +1837,8 @@
 
     // 导出函数到全局作用域
     window.showDimensionDetail = showDimensionDetail;
+    window.showFullDimensionDetail = showFullDimensionDetail;
+    window.closeDimensionDetail = closeDimensionDetail;
     window.showQuickNav = showQuickNav;
     window.scrollToSection = scrollToSection;
     window.closeModal = closeModal;
