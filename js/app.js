@@ -104,7 +104,8 @@ class DimensionExplorerApp {
     // 14. 开始会话追踪
     this.progressTracker.startSession();
 
-    console.log('维度探索器 v5.0 初始化完成！');
+    console.log('维度探索器 v6.0 - 综合科幻百科版 初始化完成！');
+    console.log('科幻百科模块已加载');
   }
 
   handleScroll() {
@@ -210,8 +211,14 @@ class DimensionExplorerApp {
   }
 
   initSciFiCompendium() {
-    const { ui, search } = initSciFiCompendium();
-    this.sciFiCompendium = { ui, search };
+    try {
+      const { ui, search } = initSciFiCompendium();
+      this.sciFiCompendium = { ui, search };
+      console.log('科幻百科 UI 初始化成功');
+    } catch (error) {
+      console.error('科幻百科初始化失败:', error);
+      console.log('继续加载其他模块...');
+    }
   }
 
   bindEvents() {

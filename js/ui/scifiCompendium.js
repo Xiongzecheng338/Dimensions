@@ -606,17 +606,17 @@ export class SciFiCompendiumUI {
   }
 
   renderHistory() {
-    const { cosmicHistory } = cosmicHistory;
+    const cosmicHistoryData = cosmicHistory;
     
     return `
       <div class="compendium-content">
-        <div class="content-header ${cosmicHistory.color}">
-          <h2>${cosmicHistory.icon} ${cosmicHistory.title}</h2>
-          <p>${cosmicHistory.description}</p>
+        <div class="content-header ${cosmicHistoryData.color}">
+          <h2>${cosmicHistoryData.icon} ${cosmicHistoryData.title}</h2>
+          <p>${cosmicHistoryData.description}</p>
         </div>
 
         <div class="timeline-container">
-          ${cosmicHistory.eras.map((era, eraIndex) => `
+          ${cosmicHistoryData.eras.map((era, eraIndex) => `
             <div class="timeline-era ${era.color}">
               <h3 class="era-title">${era.name}</h3>
               <span class="era-time">${era.timeRange}</span>

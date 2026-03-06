@@ -534,5 +534,26 @@ body: ['Noto Sans SC', 'sans-serif']
 
 <!-- ES6 模块脚本 -->
 <script type="module" src="js/app.js"></script>
+<script>
+// 错误监控和调试
+window.addEventListener('error', function(event) {
+  console.error('全局错误:', event.message);
+  console.error('文件:', event.filename, '行:', event.lineno, '列:', event.colno);
+  console.error('错误对象:', event.error);
+  
+  // 显示错误提示
+  const errorDiv = document.createElement('div');
+  errorDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:#ff4444;color:white;padding:15px;border-radius:5px;z-index:9999;max-width:400px;box-shadow:0 2px 10px rgba(0,0,0,0.3);';
+  errorDiv.innerHTML = '<strong>❌ 加载错误</strong><br>' + event.message + '<br><small>' + event.filename + ':' + event.lineno + '</small>';
+  document.body.appendChild(errorDiv);
+});
+
+window.addEventListener('unhandledrejection', function(event) {
+  console.error('未处理的 Promise 拒绝:', event.reason);
+});
+
+console.log('%c🚀 维度探索器 v6.0 开始加载...', 'font-size:16px;font-weight:bold;color:#00d4ff');
+console.log('%c 加载科幻百科、宇宙历史、外星文明等全新内容！', 'font-size:12px;color:#7b2dff');
+</script>
 </body>
 </html>
